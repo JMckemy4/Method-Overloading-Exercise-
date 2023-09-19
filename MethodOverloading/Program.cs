@@ -1,64 +1,73 @@
 ﻿using System.ComponentModel.Design;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Reflection;
+using System.Globalization;
 
 namespace MethodOverloading
 {
-    public class Program
+    internal class Program
     {
         public static int Add(int num1, int num2)
         {
-            return num1 + num2;
+            int sum = num1 + num2;
+            Console.WriteLine($"Integer Sum: {sum}");
+            return sum;
         }
 
-        public static double Add(double dbl1, double dbl2)
+        public static decimal Add(decimal num1, decimal num2)
         {
-            Console.WriteLine($"{dbl1 + dbl2.ToString()} +dollar");
-            return dbl1 + dbl2;
+            decimal sum = num1 + num2;
+            Console.WriteLine($"Decimal Sum: {sum}");
+            return sum;
         }
 
         public static string Add(int num1, int num2, bool stayHard)
         {
+            int sum = num1 + num2;
+            string result;
+
             if (stayHard)
             {
-                if (num1 + num2 > 1)
-                {
-                    Console.WriteLine($"{num1 + num2} dollars");
-                    return (num1 + num2).ToString() + "dollars";
-
-                }//insideif
-                else 
-                {
-                    Console.WriteLine($"{num1 + num2} dollar");
-                    return (num1 + num2).ToString() + "dollar";
-                }
-            }//outsideif
-
+                result = sum > 1 ? $"{sum} dollars" : $"{sum} dollar";
+            }
             else
             {
-                Console.WriteLine($"{num1 + num2}");
-                return (num1 + num2).ToString();
+                result = sum.ToString(CultureInfo.InvariantCulture);
+            }
 
-            }//else
+            Console.WriteLine($"String Sum: {result}");
+            return result;
+        }
 
-        }//add3
+        static void Main(string[] args)
+        {
+            // Call and display the result of the first Add method
+            int intSum = Add(5, 10);
 
+            // Call and display the result of the second Add method
+            decimal decimalSum = Add(5.5m, 10.5m);
 
-
-                    static void Main(string[] args)
-                    {
-                        Add(1, 2);
-                        Add(3.2, 2.999);
-                        Add(-1, 0, true);
-                    }//main
-                }//class
-            } //namespace
-        
-    
-        
-    
+            // Call and display the result of the third Add method
+            string strSum = Add(3, 2, true);
 
 
-    
-    
+        }//else
+    }
+}
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
